@@ -4,7 +4,7 @@ A modern and responsive blog application built with Django. **The Dispatch Journ
 
 ## 📸 Screenshot
 
-![The Dispatch Journal Home Page](screenshots/home.png)
+![The Dispatch Journal Home Page](./image.png)
 
 ## 🌐 Live Demo
 
