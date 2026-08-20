@@ -1,0 +1,15 @@
+{% extends "profilePage.html" %}
+{% block title %} Edit Profile {% endblock %}
+{% block profile_content %}
+{% load crispy_forms_tags %}
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    
+    <p class="text-center d-flex justify-content-center gap-5">
+        <a class="text-decoration-underline" href="{% url 'editprofile1' %}">1</a>
+        <a class="text-decoration-underline" href="{% url 'editprofile2' %}">2</a>
+    </p><br>
+    <input type="submit" class="btn btn-primary" value="Submit"> 
+</form>
+{% endblock %}

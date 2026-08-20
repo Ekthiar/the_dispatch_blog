@@ -1,0 +1,25 @@
+{% extends "profilePage.html" %}
+{% block profile_content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in posts %}
+        <tr>
+            <th scope="row">{{ forloop.counter}}</th>
+            <td>{{post.title}}</td>
+            <td><a class='btn btn-warning' href="{% url 'edit_post' post.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'delete_post' post.id %}">Delete</a></td>
+        </tr>
+    {% endfor %} 
+  </tbody>
+</table>
+{% endblock %}
+
+

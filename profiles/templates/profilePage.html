@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block main %}
+
+<div class="dashboard-shell">
+
+  <!-- Sidebar -->
+  <aside class="dashboard-sidebar">
+    <div class="sidebar-scroll">
+
+      <div class="sidebar-account">
+        <span class="sidebar-avatar">{{ request.user.username|first|upper }}</span>
+        <span class="sidebar-username">{{ request.user.username|upper }}</span>
+      </div>
+
+      <div class="sidebar-group">
+        <span class="sidebar-eyebrow">Workspace</span>
+        <ul class="sidebar-nav">
+          <li>
+            <a href="{% url 'add_post' %}" class="sidebar-link">
+              <i class="bi bi-pencil-square"></i>
+              Create post
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'dashboard' %}" class="sidebar-link">
+              <i class="bi bi-collection"></i>
+              Manage posts
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <span class="sidebar-eyebrow">Account</span>
+        <ul class="sidebar-nav">
+          <li>
+            <a href="{% url 'editprofile1' %}" class="sidebar-link">
+              <i class="bi bi-person-gear"></i>
+              Edit profile
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'change_pass' %}" class="sidebar-link">
+              <i class="bi bi-key"></i>
+              Reset password
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group sidebar-group-bottom">
+        <span class="sidebar-eyebrow">Session</span>
+        <ul class="sidebar-nav">
+          <li>
+            <a href="{% url 'signout' %}" class="sidebar-link sidebar-link-warn">
+              <i class="bi bi-box-arrow-right"></i>
+              Log out
+            </a>
+          </li>
+          <li>
+            <a href="#" class="sidebar-link sidebar-link-danger">
+              <i class="bi bi-trash"></i>
+              Delete account
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="dashboard-content">
+
+    {% block profile_content %}
+
+    <div class="section-eyebrow">
+      <span class="label">Edit profile</span>
+      <span class="rule"></span>
+    </div>
+
+    <div class="content-card">
+      <h2 class="content-card-title">Your details</h2>
+      <p class="content-card-sub">Update the information readers see on your byline.</p>
+
+      <form action="" method="post" class="dispatch-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <input type="submit" class="btn-dispatch" value="Update profile">
+      </form>
+    </div>
+
+    {% endblock profile_content %}
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Cetagories {% endblock title %}
+{% block main %} 
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button class="btn btn-primary" type="submit">submit</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "profilePage.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Post {% endblock title %}
+{% block profile_content %} 
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <small><a class='btn btn-info btn-sm' href="{% url 'add_category' %}">add Cetagory</a></small>
+    <input type="submit" class="btn btn-primary" value="Submit">
+
+</form>
+
+    
+    
+
+{% endblock %}

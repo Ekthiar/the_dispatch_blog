@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} — The Dispatch{% endblock %}
+
+{% block main %}
+
+<div class="article-shell">
+
+  <a href="{% url 'home' %}" class="back-link">&larr; Back to dispatches</a>
+
+  <div class="article-meta-top">
+    <span class="category-tags">
+      {% for category in post.cetagory.all %}
+      <span class="tag">{{ category.name }}</span>
+      {% endfor %}
+    </span>
+    <span class="article-date">{{ post.created_at|date:"F d, Y" }}</span>
+  </div>
+
+  <h1 class="article-title">{{ post.title }}</h1>
+
+  {% if post.subtitle %}
+  <p class="article-subtitle">{{ post.subtitle }}</p>
+  {% endif %}
+
+  <div class="article-byline">
+    <span class="author-avatar author-avatar-lg">{{ post.author.username|first|upper }}</span>
+    <div class="author-info">
+      <span class="author-name">{{ post.author.get_full_name|default:post.author.username }}</span>
+      <span class="read-time">{{ post.content|wordcount }} words &middot; {{ post.created_at|date:"M d, Y" }}</span>
+    </div>
+  </div>
+
+  {% if post.image %}
+  <img src="{{ post.image.url }}" class="article-hero" alt="{{ post.title }}" />
+  {% else %}
+  <img src="https://placehold.co/1200x600" class="article-hero" alt="Default cover image" />
+  {% endif %}
+
+  <div class="article-body">
+    {{ post.content|linebreaks }}
+  </div>
+
+  <div class="article-footer">
+    <div class="article-footer-tags">
+      {% for category in post.cetagory.all %}
+      <span class="tag">{{ category.name }}</span>
+      {% endfor %}
+    </div>
+    <a href="{% url 'home' %}" class="read-link">More dispatches</a>
+  </div>
+
+</div>
+
+{% if related_posts %}
+<div class="section-eyebrow related-eyebrow">
+  <span class="label">Related dispatches</span>
+  <span class="rule"></span>
+</div>
+
+<div class="post-grid mb-5">
+  {% for post in related_posts %}
+  <article class="post-card">
+    <a href="{% url 'post_detail' post.pk %}" class="post-image-link">
+      {% if post.image %}
+      <img src="{{ post.image.url }}" class="post-image" alt="{{ post.title }}" loading="lazy" />
+      {% else %}
+      <img src="https://placehold.co/600x350" class="post-image" alt="Default cover image" loading="lazy" />
+      {% endif %}
+    </a>
+
+    <div class="meta-row">
+      <span class="category-tags">
+        {% for category in post.cetagory.all %}
+        <span class="tag">{{ category.name }}</span>
+        {% endfor %}
+      </span>
+      <span>{{ post.created_at|date:"M d, Y" }}</span>
+    </div>
+
+    <h3 class="card-title"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h3>
+    <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+
+    <div class="post-footer">
+      <div class="author-row">
+        <span class="author-avatar">{{ post.author.username|first|upper }}</span>
+        <div class="author-info">
+          <span class="author-name">{{ post.author.get_full_name|default:post.author.username }}</span>
+          <span class="read-time">{{ post.content|wordcount }} words</span>
+        </div>
+      </div>
+      <a href="{% url 'post_detail' post.pk %}" class="read-link">Read</a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock main %}
