@@ -26,7 +26,7 @@ def edit_profile1(request):
                 return redirect('profile')
         else:
             form = forms.EditProfileForm1(instance = request.user)
-        return render(request, 'editprofilePage.html', {'form': form})
+        return render(request, 'editProfilePage.html', {'form': form})
     else:
         return redirect('signin')
     
@@ -41,7 +41,7 @@ def edit_profile2(request):
                 return redirect('profile')
         else:
             form = forms.ProfileForm(instance=request.user)
-        return render(request, 'editprofilePage.html', {'form': form})
+        return render(request, 'editProfilePage.html', {'form': form})
     else:
         return redirect('signin')
     
