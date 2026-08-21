@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'blogProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'the_dispatch_journal',
+        'USER': 'the_dispatch_journal_user',
+        'PASSWORD': 'H0PVqhbsN8NjdgfPH7HbaaX0sfITT0bI',
+        'HOST': 'dpg-da4ar5qjobas73am2u1g-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
